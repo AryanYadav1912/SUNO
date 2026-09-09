@@ -47,6 +47,11 @@
   color: #5c5a54;
 }
 
+.menu-toggle,
+.mobile-playlist-menu {
+  display: none;
+}
+
 .dark-mode {
   background: #181b1a;
   color: #ece9e0;
@@ -64,9 +69,20 @@
 .dark-mode .track { border-color: #343a37; color: #f0ede4; }
 .dark-mode .track:hover, .dark-mode .track.selected { background: #2a302d; }
 .dark-mode .track small, .dark-mode .track em, .dark-mode .track i, .dark-mode .track time { color: #aaaea7; }
+.dark-mode .mobile-playlist-menu { background: #222624; border-color: #414844; }
+.dark-mode .mobile-playlist-menu p, .dark-mode .mobile-playlist-menu small { color: #aaaea7; }
+.dark-mode .mobile-playlist-menu button { color: #f1eee5; border-color: #414844; }
+.dark-mode .mobile-playlist-menu button.selected { background: #333936; }
 
 @media (max-width: 760px) {
   .content > header { display: flex; height: 52px; }
   .content > header .back { display: none; }
   .header-actions { margin-left: auto; }
+  .menu-toggle { display: grid; width: 33px; height: 33px; place-items: center; border: 1px solid #e4e1d9; border-radius: 50%; background: transparent; color: #5c5a54; }
+  .mobile-playlist-menu { position: fixed; z-index: 5; inset: 60px 12px auto; display: grid; gap: 0; padding: 8px; border: 1px solid #e4e1d9; border-radius: 6px; background: #f7f5ef; box-shadow: 0 12px 30px rgba(36, 37, 37, .16); }
+  .mobile-playlist-menu p { margin: 8px 10px 10px; color: #9a9387; font: 10px 'DM Mono', monospace; text-transform: uppercase; }
+  .mobile-playlist-menu button { display: grid; gap: 4px; width: 100%; padding: 12px 10px; border: 0; border-top: 1px solid #e4e1d9; background: transparent; color: #242525; text-align: left; }
+  .mobile-playlist-menu button.selected { background: #eae7de; }
+  .mobile-playlist-menu span { font-size: 13px; font-weight: 700; }
+  .mobile-playlist-menu small { color: #716f69; font-size: 11px; line-height: 1.4; }
 }

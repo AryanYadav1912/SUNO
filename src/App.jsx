@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Heart, LoaderCircle, Moon, Pause, Play, Search, SkipBack, SkipForward, Sun, Volume2 } from 'lucide-react'
+import { Heart, LoaderCircle, Menu, Moon, Pause, Play, Search, SkipBack, SkipForward, Sun, Volume2, X } from 'lucide-react'
 import { fetchPlaylistTracks, playlists } from './youtubeCatalog'
 import './App.css'
 import './interface-fix.css'
@@ -24,6 +24,7 @@ function App() {
   const [liked, setLiked] = useState(false)
   const [progress, setProgress] = useState(0)
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('suno-theme') === 'dark')
+  const [menuOpen, setMenuOpen] = useState(false)
   const [selectedPlaylist, setSelectedPlaylist] = useState('punjabiPop')
   const [catalogState, setCatalogState] = useState(import.meta.env.VITE_YOUTUBE_API_KEY ? 'loading' : 'needs-key')
   const [catalogError, setCatalogError] = useState('')
@@ -41,6 +42,8 @@ function App() {
     let activeRequest = true
     setCatalogState('loading')
     setCatalogError('')
+    setTracks([])
+    setActive(0)
     fetchPlaylistTracks(apiKey, playlist)
       .then((catalog) => {
         if (!activeRequest || !catalog.length) return
@@ -87,12 +90,16 @@ function App() {
     setProgress(0)
     playerRef.current?.loadVideoById(tracks[index].id)
   }
-  const moveTrack = (amount) => selectTrack((active + amount + tracks.length) % tracks.length)
+  const moveTrack = (amount) => {
+    if (!tracks.length) return
+    selectTrack((active + amount + tracks.length) % tracks.length)
+  }
   const choosePlaylist = (playlistKey) => {
     setPlaying(false)
     setProgress(0)
     setActive(0)
     setSelectedPlaylist(playlistKey)
+    setMenuOpen(false)
   }
   const togglePlayback = () => playing ? playerRef.current?.pauseVideo() : playerRef.current?.playVideo()
   const seekAndPlay = (event) => {
@@ -108,7 +115,8 @@ function App() {
   return <main className={`app-shell ${darkMode ? 'dark-mode' : ''}`}>
     <aside className="sidebar"><a className="brand" href="#top">SUNO<span>.</span></a><nav><a className="active" href="#top">For you</a><a href="#library"><Search size={16} /> Discover</a></nav><div className="library"><p>Your playlists</p>{Object.entries(playlists).map(([key, item]) => <button className={`playlist-button ${selectedPlaylist === key ? 'selected' : ''}`} type="button" key={key} onClick={() => choosePlaylist(key)}>{item.name}</button>)}</div><small>Made for unhurried days.</small></aside>
     <section className="content" id="top">
-      <header><span className="back">‹</span><div className="header-actions"><button className="theme-toggle" type="button" onClick={() => setDarkMode(!darkMode)} aria-label={darkMode ? 'Use light mode' : 'Use dark mode'} title={darkMode ? 'Use light mode' : 'Use dark mode'}>{darkMode ? <Sun size={17} /> : <Moon size={17} />}</button><button className="profile">AR</button></div></header>
+      <header><span className="back">‹</span><div className="header-actions"><button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close playlists menu' : 'Open playlists menu'} aria-expanded={menuOpen}>{menuOpen ? <X size={19} /> : <Menu size={20} />}</button><button className="theme-toggle" type="button" onClick={() => setDarkMode(!darkMode)} aria-label={darkMode ? 'Use light mode' : 'Use dark mode'} title={darkMode ? 'Use light mode' : 'Use dark mode'}>{darkMode ? <Sun size={17} /> : <Moon size={17} />}</button><button className="profile">AR</button></div></header>
+      {menuOpen && <div className="mobile-playlist-menu" role="dialog" aria-label="Choose a playlist"><p>Your playlists</p>{Object.entries(playlists).map(([key, item]) => <button className={selectedPlaylist === key ? 'selected' : ''} type="button" key={key} onClick={() => choosePlaylist(key)}><span>{item.name}</span><small>{item.description}</small></button>)}</div>}
       <section className="hero"><div><p>Curated YouTube playlist</p><h1>{playlist.name}</h1><article>{playlist.description}</article><button className="dark-button" onClick={() => selectTrack(0)}><Play size={17} fill="currentColor" /> Play mix</button></div><img src={song.thumbnail} alt="Current song artwork" /></section>
       <section className="queue" id="library"><div className="title-row"><div><p>Curated for you</p><h2>{playlist.name}</h2></div><button type="button">{tracks.length} songs</button></div>
         <p className={`catalog-status ${catalogState}`}>{catalogState === 'loading' && <LoaderCircle size={14} />} {catalogMessage}</p>

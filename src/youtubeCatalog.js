@@ -34,8 +34,9 @@ export async function fetchPlaylistTracks(apiKey, playlist) {
     })
     const response = await fetch(`${PLAYLIST_ITEMS_URL}?${params}`)
     if (!response.ok) {
+      const errorData = await response.json().catch(() => null)
       if (response.status === 429) throw new Error('YouTube API rate limit reached. Wait a few minutes before trying again.')
-      throw new Error('YouTube could not load this music selection.')
+      throw new Error(errorData?.error?.message || 'YouTube could not load this playlist.')
     }
 
     const data = await response.json()
