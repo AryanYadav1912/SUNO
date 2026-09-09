@@ -78,6 +78,15 @@
   .content > header { display: flex; height: 52px; }
   .content > header .back { display: none; }
   .header-actions { margin-left: auto; }
+  .app-shell { padding-bottom: 150px; }
+  footer { height: 138px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 50px 32px; gap: 8px 12px; }
+  .now { grid-column: 1; grid-row: 1; }
+  .player { display: grid; grid-column: 1 / -1; grid-row: 2; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; width: 100%; }
+  .player .transport { justify-content: flex-start; }
+  .player .progress-slider { display: grid; width: 100%; min-width: 0; }
+  .player .progress-slider input { width: 100%; }
+  .volume { display: flex; grid-column: 2; grid-row: 1; justify-content: flex-end; }
+  .volume input { width: 64px; }
   .menu-toggle { display: grid; width: 33px; height: 33px; place-items: center; border: 1px solid #e4e1d9; border-radius: 50%; background: transparent; color: #5c5a54; }
   .mobile-playlist-menu { position: fixed; z-index: 5; inset: 60px 12px auto; display: grid; gap: 0; padding: 8px; border: 1px solid #e4e1d9; border-radius: 6px; background: #f7f5ef; box-shadow: 0 12px 30px rgba(36, 37, 37, .16); }
   .mobile-playlist-menu p { margin: 8px 10px 10px; color: #9a9387; font: 10px 'DM Mono', monospace; text-transform: uppercase; }
