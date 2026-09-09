@@ -1,0 +1,72 @@
+@media (max-height: 480px) {
+  .app-shell {
+    padding-bottom: 20px;
+  }
+
+  .hero {
+    min-height: 220px;
+  }
+
+  footer {
+    position: static;
+    margin-top: 28px;
+  }
+}
+
+.playlist-button {
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #716f69;
+  padding: 9px 10px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.playlist-button:hover,
+.playlist-button.selected {
+  background: #f7f5ef;
+  color: #242525;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle {
+  display: grid;
+  width: 33px;
+  height: 33px;
+  place-items: center;
+  border: 1px solid #e4e1d9;
+  border-radius: 50%;
+  background: transparent;
+  color: #5c5a54;
+}
+
+.dark-mode {
+  background: #181b1a;
+  color: #ece9e0;
+}
+
+.dark-mode .sidebar { background: #222624; }
+.dark-mode .brand, .dark-mode .hero h1, .dark-mode h2 { color: #f1eee5; }
+.dark-mode .sidebar a:not(.brand), .dark-mode .playlist-button { color: #b6b8b1; }
+.dark-mode .sidebar nav .active, .dark-mode .playlist-button:hover, .dark-mode .playlist-button.selected { background: #333936; color: #fff; }
+.dark-mode .content > header { background: #181b1a; }
+.dark-mode .back, .dark-mode .theme-toggle { border-color: #414844; color: #d5d5cd; }
+.dark-mode .hero { background: #35423d; }
+.dark-mode .hero article { color: #d0d5ce; }
+.dark-mode .queue { background: #181b1a; }
+.dark-mode .track { border-color: #343a37; color: #f0ede4; }
+.dark-mode .track:hover, .dark-mode .track.selected { background: #2a302d; }
+.dark-mode .track small, .dark-mode .track em, .dark-mode .track i, .dark-mode .track time { color: #aaaea7; }
+
+@media (max-width: 760px) {
+  .content > header { display: flex; height: 52px; }
+  .content > header .back { display: none; }
+  .header-actions { margin-left: auto; }
+}
