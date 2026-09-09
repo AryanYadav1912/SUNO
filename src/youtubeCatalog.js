@@ -13,6 +13,11 @@ export const playlists = {
     description: 'A softer, unhurried collection for quiet moments.',
     playlistId: 'PL1gfuz7ZYcaM2Z7sCGOWORCF0CGmonzOv',
   },
+  ninetiesSongs: {
+    name: "90's Songs",
+    description: 'Timeless Hindi film songs from the 1990s.',
+    playlistId: 'PLAFjPVdERAkt7jNU1XW7EWXHLyYyf7Sux',
+  },
 }
 
 export async function fetchPlaylistTracks(apiKey, playlist) {
