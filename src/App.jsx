@@ -110,7 +110,7 @@ function App() {
     player?.seekTo(seekTime, true)
     player?.playVideo()
   }
-  const catalogMessage = catalogState === 'loading' ? `Loading ${playlist.name}...` : catalogState === 'needs-key' ? 'Add VITE_YOUTUBE_API_KEY to .env.local to load this playlist.' : catalogState === 'error' ? catalogError : `${tracks.length} ${playlist.name} songs loaded from YouTube.`
+  const catalogMessage = catalogState === 'loading' ? `Loading ${playlist.name}...` : catalogState === 'needs-key' ? 'Add VITE_YOUTUBE_API_KEY to .env.local to load this playlist.' : catalogState === 'error' ? catalogError : `${playlist.name}`
 
   return <main className={`app-shell ${darkMode ? 'dark-mode' : ''}`}>
     <aside className="sidebar"><a className="brand" href="#top">SUNO<span>.</span></a><nav><a className="active" href="#top">For you</a><a href="#library"><Search size={16} /> Discover</a></nav><div className="library"><p>Your playlists</p>{Object.entries(playlists).map(([key, item]) => <button className={`playlist-button ${selectedPlaylist === key ? 'selected' : ''}`} type="button" key={key} onClick={() => choosePlaylist(key)}>{item.name}</button>)}</div><small>Made for unhurried days.</small></aside>

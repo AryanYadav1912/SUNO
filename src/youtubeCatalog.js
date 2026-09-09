@@ -1,6 +1,6 @@
 const PLAYLIST_ITEMS_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
-const PAGE_SIZE = 50
-const MAX_TRACKS = 50
+const PAGE_SIZE = 80
+const MAX_TRACKS = 80
 
 export const playlists = {
   punjabiPop: {
@@ -18,6 +18,11 @@ export const playlists = {
     description: 'Timeless Hindi film songs from the 1990s.',
     playlistId: 'PLAFjPVdERAkt7jNU1XW7EWXHLyYyf7Sux',
   },
+  twoThousandSongs: {
+    name: "2000's Songs",
+    description: 'Popular Hindi film songs from the 2000s.',
+    playlistId: 'PLjxsdvPZH24OZoxZSnuEqrW1crVtceCNG',
+},
 }
 
 export async function fetchPlaylistTracks(apiKey, playlist) {
